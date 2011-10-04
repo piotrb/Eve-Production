@@ -1,0 +1,57 @@
+<ul>
+  <li>Name: <%= link_to item.typeName, :action => "info", :id => item.id %>(<%= item.id %>)</li>
+  <li>Group: <%= item.inv_group.groupName %> ( <%= item.inv_group.id %> )</li>
+  <li>Group Category: <%= item.inv_group.inv_category.categoryName %> (<%= item.inv_group.inv_category.id %>)</li>
+  <li>Market Group: <%= item.inv_market_group.full_name if item.inv_market_group %> (<%= item.inv_market_group.id if item.inv_market_group %>)</li>
+  <% if item.inv_group.categoryID == 9 # blueprints -%>
+  <ul>
+    <li>Product: <%= link_to item.inv_blueprint_type.product.typeName, :action => "info", :id => item.inv_blueprint_type.product.id %></li>
+    <% if item.inv_blueprint_type.parent_blueprint %>
+    <li>Parent Blueprint: <%= link_to item.inv_blueprint_type.parent_blueprint.blueprint.typeName, :action => "info", :id => item.inv_blueprint_type.parent_blueprint.blueprint.id %></li>
+    <% end %>
+    <% unless item.inv_blueprint_type.child_blueprints.empty? %>
+    <li>Child Blueprints:
+      <ul>
+        <% item.inv_blueprint_type.child_blueprints.each do |cbp| -%>
+          <li><%= link_to cbp.blueprint.typeName, :action => "info", :id => cbp.blueprint.id %></li>
+        <% end -%>
+      </ul>
+    </li>
+    <% end %>
+    <li>Price: 
+    <% if item.actual_cheapest_price %>
+    <%= number_with_precision item.actual_cheapest_price.first, :delimiter => "," %> @ <%= item.actual_cheapest_price.last %>
+    <% else -%>
+    none
+    <% end %>
+    </li>
+    <li>Materials:
+      <ul>
+        <% item.inv_blueprint_type.product.materials.each do |mat| -%>
+          <li><%= mat.quantity %> x <%= link_to mat.material.typeName, :action => "info", :id => mat.material.id %> --  
+            <% if mat.material.actual_cheapest_price -%>
+             <%= mat.material.actual_cheapest_price.first %> @ <%= mat.material.actual_cheapest_price.last %>
+            <% else -%>
+              no price
+            <% end -%>
+          </li>
+        <% end -%>
+      </ul>
+    </li>
+  </ul>
+  <% end -%>
+  <ul>
+    <li>
+      Prices:
+      <ul>
+        <% item.prices.each do |price| -%>
+          <li><%= price.price %> @ <%= price.location.name %> [<%= link_to "edit", [:edit, price] %>] [<%= link_to "del", [price], :method => :delete %>]</li>
+        <% end -%>
+      </ul>
+      <%= link_to "add", new_price_path(:typeID => item) %>
+    </li>
+  </ul>
+  <% if item.created_by_blueprint -%>
+    <li>Created By: <%= link_to item.created_by_blueprint.blueprint.typeName, :action => "info", :id => item.created_by_blueprint.blueprint.id %></li>
+  <% end -%>
+</ul>

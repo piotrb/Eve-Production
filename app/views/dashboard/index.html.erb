@@ -1,0 +1,12 @@
+Hello
+
+<%= form_tag do %>
+<%= text_field_tag "q", params[:q] %>
+<%= submit_tag "Go" %>
+<% end %>
+
+<ul>
+  <% @items.each do |item| -%>
+  <li><%= link_to item.typeName, :action => "info", :id => item.id %></li>
+  <% end -%>
+</ul>

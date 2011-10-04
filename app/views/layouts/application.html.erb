@@ -8,7 +8,18 @@
 </head>
 <body>
 
-<%= yield %>
+  <div>
+
+    <div class="header">
+      <%= link_to "dashboard", root_path %> |
+      <%= link_to "locations", locations_path %>
+    </div>
+
+    <div class="body">
+      <%= yield %>
+    </div>
+
+  </div>
 
 </body>
 </html>
