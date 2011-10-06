@@ -47,7 +47,7 @@ namespace :eve do
     tables.each { |t|
       puts "extracting table #{t} ..."
       file = "db/eve/#{t}.sql"
-      sh "mysqldump -u dev -pdev --skip-extended-insert --compact --add-drop-table  test #{t} > #{file}"
+      sh "mysqldump -u dev -pdev --skip-extended-insert --compact test #{t} > #{file}"
     }
 
     # cleanup

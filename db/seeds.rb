@@ -16,6 +16,7 @@ tables = %w(
 )
 
 tables.each { |t|
+  ActiveRecord::Base.connection.drop_table(t) if ActiveRecord::Base.connection.tables.include?(t)
   File.open("db/eve/#{t}.sql") do |fh|
     buffer = ""
     until fh.eof?
