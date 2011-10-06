@@ -5,3 +5,29 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+tables = %w(
+  invblueprinttypes
+  invcategories
+  invgroups
+  invmarketgroups
+  invtypes
+  invtypematerials
+)
+
+tables.each { |t|
+  File.open("db/eve/#{t}.sql") do |fh|
+    buffer = ""
+    until fh.eof?
+      line = fh.readline
+      if line =~ /^\/\*/
+        line = nil
+      end
+      buffer << line if line
+      if line =~ /;\n$/
+        ActiveRecord::Base.connection.execute(buffer)
+        buffer = ""
+      end
+    end
+  end
+}
