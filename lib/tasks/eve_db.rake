@@ -40,14 +40,14 @@ namespace :eve do
     # undump the sql dump to the test db
 
     p "extracting dump ..."
-    sh "cat #{extracted} | sed -E 's/^(CREATE DATABASE|USE) /-- \1 /' | mysql -u dev -pdev test"
+    sh "sed -E 's/^(CREATE DATABASE|USE) /-- \1 /' #{extracted} | mysql -u dev -pdev test"
 
     FileUtils.mkdir_p("db/eve/")
 
     tables.each { |t|
       puts "extracting table #{t} ..."
       file = "db/eve/#{t}.sql"
-      sh "mysqldump -u dev -pdev --skip-extended-insert --compact test #{t} > #{file}"
+      sh "mysqldump -u dev -pdev --skip-extended-insert --compact --compatible=ansi test #{t} > #{file}"
     }
 
     # cleanup
