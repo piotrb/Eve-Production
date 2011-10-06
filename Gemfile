@@ -19,6 +19,8 @@ gem 'heroku'
 
 gem 'jquery-rails'
 
+gem "airbrake"
+
 group :production do
   gem "pg"
 end
