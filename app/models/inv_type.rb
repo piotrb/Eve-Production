@@ -3,7 +3,7 @@ class InvType < EveModel
   set_table_name "invtypes"
   set_primary_key "typeID"
 
-  scope :items, includes("inv_group").where("invGroups.categoryID in (?)", InvCategory.good_categories).where("invTypes.groupID not in (?)", InvGroup.bad_groups)
+  scope :items, includes("inv_group").where("invgroups.categoryID in (?)", InvCategory.good_categories).where("invtypes.groupID not in (?)", InvGroup.bad_groups)
 
   belongs_to :inv_group, :foreign_key => "groupID"
   belongs_to :inv_market_group, :foreign_key => "marketGroupID"
