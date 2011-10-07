@@ -1,6 +1,6 @@
 class InvBlueprintType < EveModel
 
-  set_table_name "invBlueprintTypes"
+  set_table_name "invblueprinttypes"
   set_primary_key "blueprintTypeID"
 
   belongs_to :blueprint, :class_name => "InvType", :foreign_key => "blueprintTypeID"

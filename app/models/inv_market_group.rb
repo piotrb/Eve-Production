@@ -1,6 +1,6 @@
 class InvMarketGroup < EveModel
 
-  set_table_name "invMarketGroups"
+  set_table_name "invmarketgroups"
   set_primary_key "marketGroupID"
 
   has_many :item_types, :foreign_key => "marketGroupID"

@@ -1,6 +1,6 @@
 class InvGroup < EveModel
 
-  set_table_name "invGroups"
+  set_table_name "invgroups"
 
   set_primary_key "groupID"
 

@@ -1,6 +1,6 @@
 class InvType < EveModel
 
-  set_table_name "invTypes"
+  set_table_name "invtypes"
   set_primary_key "typeID"
 
   scope :items, includes("inv_group").where("invGroups.categoryID in (?)", InvCategory.good_categories).where("invTypes.groupID not in (?)", InvGroup.bad_groups)

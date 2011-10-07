@@ -1,6 +1,6 @@
 class InvCategory < EveModel
 
-  set_table_name "invCategories"
+  set_table_name "invcategories"
   set_primary_key "categoryID"
 
   has_many :inv_groups, :foreign_key => "categoryID"
