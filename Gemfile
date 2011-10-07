@@ -4,7 +4,7 @@ gem 'rails', '~> 3.1.0'
 
 gem 'mysql2'
 
-gem 'mongrel'
+gem 'thin'
 gem 'json'
 
 # Gems used only for assets and not required
