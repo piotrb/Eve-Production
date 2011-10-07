@@ -21,6 +21,8 @@ gem 'jquery-rails'
 
 gem "airbrake"
 
+gem "activerecord-import"
+
 group :production do
   gem "pg"
 end
