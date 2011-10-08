@@ -20,13 +20,13 @@ ActiveRecord::Schema.define(:version => 20100913130534) do
 
   create_table "prices", :force => true do |t|
     t.float    "price"
-    t.integer  "typeID"
+    t.integer  "typeid"
     t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "prices", ["location_id"], :name => "index_prices_on_location_id"
-  add_index "prices", ["typeID"], :name => "index_prices_on_typeID"
+  add_index "prices", ["typeid"], :name => "index_prices_on_typeid"
 
 end

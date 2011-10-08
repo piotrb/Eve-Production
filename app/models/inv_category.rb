@@ -1,9 +1,9 @@
 class InvCategory < EveModel
 
   set_table_name "invcategories"
-  set_primary_key "categoryID"
+  set_primary_key "categoryid"
 
-  has_many :inv_groups, :foreign_key => "categoryID"
+  has_many :inv_groups, :foreign_key => "categoryid"
 
   def self.good_categories
     [

@@ -23,8 +23,10 @@ gem "airbrake"
 
 gem "activerecord-import"
 
+gem "pg"
+
+
 group :production do
-  gem "pg"
 end
 
 group :test, :development do

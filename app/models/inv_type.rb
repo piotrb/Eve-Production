@@ -1,18 +1,18 @@
 class InvType < EveModel
 
   set_table_name "invtypes"
-  set_primary_key "typeID"
+  set_primary_key "typeid"
 
-  scope :items, includes("inv_group").where("invgroups.categoryID in (?)", InvCategory.good_categories).where("invtypes.groupID not in (?)", InvGroup.bad_groups)
+  scope :items, includes("inv_group").where("invgroups.categoryid in (?)", InvCategory.good_categories).where("invtypes.groupid not in (?)", InvGroup.bad_groups)
 
-  belongs_to :inv_group, :foreign_key => "groupID"
-  belongs_to :inv_market_group, :foreign_key => "marketGroupID"
+  belongs_to :inv_group, :foreign_key => "groupid"
+  belongs_to :inv_market_group, :foreign_key => "marketgroupid"
 
-  has_many :inv_type_materials, :foreign_key => "typeID"
-  has_one :inv_blueprint_type, :foreign_key => "blueprintTypeID"
-  has_one :created_by_blueprint, :foreign_key => "productTypeID", :class_name => "InvBlueprintType"
+  has_many :inv_type_materials, :foreign_key => "typeid"
+  has_one :inv_blueprint_type, :foreign_key => "blueprinttypeid"
+  has_one :created_by_blueprint, :foreign_key => "producttypeid", :class_name => "InvBlueprintType"
 
-  has_many :prices, :foreign_key => "typeID"
+  has_many :prices, :foreign_key => "typeid"
 
   def materials
     out = inv_type_materials.to_a

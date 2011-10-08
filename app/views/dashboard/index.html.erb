@@ -7,6 +7,6 @@ Hello
 
 <ul>
   <% @items.each do |item| -%>
-  <li><%= link_to item.typeName, :action => "info", :id => item.id %></li>
+  <li><%= link_to item.typename, :action => "info", :id => item.id %></li>
   <% end -%>
 </ul>

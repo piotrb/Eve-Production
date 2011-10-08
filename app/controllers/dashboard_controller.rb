@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
   def index
 
     if params[:q]
-      @items = InvType.items.where("typeName like ?", "%#{params[:q]}%")
+      @items = InvType.items.where("typename ilike ?", "%#{params[:q]}%")
     else
       @items = []
     end

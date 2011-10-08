@@ -1,19 +1,19 @@
 <ul>
-  <li>Name: <%= link_to item.typeName, :action => "info", :id => item.id %>(<%= item.id %>)</li>
-  <li>Group: <%= item.inv_group.groupName %> ( <%= item.inv_group.id %> )</li>
-  <li>Group Category: <%= item.inv_group.inv_category.categoryName %> (<%= item.inv_group.inv_category.id %>)</li>
+  <li>Name: <%= link_to item.typename, :action => "info", :id => item.id %>(<%= item.id %>)</li>
+  <li>Group: <%= item.inv_group.groupname %> ( <%= item.inv_group.id %> )</li>
+  <li>Group Category: <%= item.inv_group.inv_category.categoryname %> (<%= item.inv_group.inv_category.id %>)</li>
   <li>Market Group: <%= item.inv_market_group.full_name if item.inv_market_group %> (<%= item.inv_market_group.id if item.inv_market_group %>)</li>
-  <% if item.inv_group.categoryID == 9 # blueprints -%>
+  <% if item.inv_group.categoryid == 9 # blueprints -%>
   <ul>
-    <li>Product: <%= link_to item.inv_blueprint_type.product.typeName, :action => "info", :id => item.inv_blueprint_type.product.id %></li>
+    <li>Product: <%= link_to item.inv_blueprint_type.product.typename, :action => "info", :id => item.inv_blueprint_type.product.id %></li>
     <% if item.inv_blueprint_type.parent_blueprint %>
-    <li>Parent Blueprint: <%= link_to item.inv_blueprint_type.parent_blueprint.blueprint.typeName, :action => "info", :id => item.inv_blueprint_type.parent_blueprint.blueprint.id %></li>
+    <li>Parent Blueprint: <%= link_to item.inv_blueprint_type.parent_blueprint.blueprint.typename, :action => "info", :id => item.inv_blueprint_type.parent_blueprint.blueprint.id %></li>
     <% end %>
     <% unless item.inv_blueprint_type.child_blueprints.empty? %>
     <li>Child Blueprints:
       <ul>
         <% item.inv_blueprint_type.child_blueprints.each do |cbp| -%>
-          <li><%= link_to cbp.blueprint.typeName, :action => "info", :id => cbp.blueprint.id %></li>
+          <li><%= link_to cbp.blueprint.typename, :action => "info", :id => cbp.blueprint.id %></li>
         <% end -%>
       </ul>
     </li>
@@ -28,7 +28,7 @@
     <li>Materials:
       <ul>
         <% item.inv_blueprint_type.product.materials.each do |mat| -%>
-          <li><%= mat.quantity %> x <%= link_to mat.material.typeName, :action => "info", :id => mat.material.id %> --  
+          <li><%= mat.quantity %> x <%= link_to mat.material.typename, :action => "info", :id => mat.material.id %> --  
             <% if mat.material.actual_cheapest_price -%>
              <%= mat.material.actual_cheapest_price.first %> @ <%= mat.material.actual_cheapest_price.last %>
             <% else -%>
@@ -52,6 +52,6 @@
     </li>
   </ul>
   <% if item.created_by_blueprint -%>
-    <li>Created By: <%= link_to item.created_by_blueprint.blueprint.typeName, :action => "info", :id => item.created_by_blueprint.blueprint.id %></li>
+    <li>Created By: <%= link_to item.created_by_blueprint.blueprint.typename, :action => "info", :id => item.created_by_blueprint.blueprint.id %></li>
   <% end -%>
 </ul>
