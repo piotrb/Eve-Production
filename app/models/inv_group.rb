@@ -16,7 +16,7 @@
 #  published            :integer(2)
 #
 
-class InvGroup < EveModel
+class InvGroup < ActiveRecord::Base
 
   set_table_name "invgroups"
 

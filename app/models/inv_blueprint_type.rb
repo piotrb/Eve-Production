@@ -17,7 +17,7 @@
 #  maxproductionlimit       :integer
 #
 
-class InvBlueprintType < EveModel
+class InvBlueprintType < ActiveRecord::Base
 
   set_table_name "invblueprinttypes"
   set_primary_key "blueprinttypeid"

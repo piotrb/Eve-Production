@@ -20,7 +20,7 @@
 #  iconid              :integer
 #
 
-class InvType < EveModel
+class InvType < ActiveRecord::Base
 
   set_table_name "invtypes"
   set_primary_key "typeid"

@@ -1,5 +1,4 @@
 require 'openid/store/memcache'
-require 'openid/store/filesystem'
 
 OpenID::Store::Memcache
 
@@ -35,5 +34,4 @@ end
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :open_id, OpenID::Store::Memcache.new(Dalli::Client.new), :name => "google", :identifier => 'https://www.google.com/accounts/o8/id'
-#  provider :open_id, OpenID::Store::Filesystem.new('/tmp'), :name => "google", :identifier => 'https://www.google.com/accounts/o8/id'
 end

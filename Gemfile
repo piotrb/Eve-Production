@@ -9,7 +9,7 @@ gem 'json'
 gem 'heroku'
 #gem "airbrake"
 gem 'jquery-rails'
-gem "activerecord-import"
+gem "activerecord-import", :require => false
 
 gem "omniauth"
 gem "ruby-openid", :require => "openid"

@@ -21,7 +21,7 @@ test:
 
 production:
   adapter: postgresql
-  database: eve_production_dev
+  database: eve_production_production
   host: 127.0.0.1
   username: dev
   password: dev

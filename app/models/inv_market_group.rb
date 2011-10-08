@@ -10,7 +10,7 @@
 #  hastypes        :integer(2)
 #
 
-class InvMarketGroup < EveModel
+class InvMarketGroup < ActiveRecord::Base
 
   set_table_name "invmarketgroups"
   set_primary_key "marketgroupid"

@@ -7,7 +7,7 @@
 #  quantity       :integer         default(0), not null
 #
 
-class InvTypeMaterial < EveModel
+class InvTypeMaterial < ActiveRecord::Base
 
   set_table_name "invtypematerials"
 

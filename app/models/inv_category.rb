@@ -9,7 +9,7 @@
 #  published    :integer(2)
 #
 
-class InvCategory < EveModel
+class InvCategory < ActiveRecord::Base
 
   set_table_name "invcategories"
   set_primary_key "categoryid"
