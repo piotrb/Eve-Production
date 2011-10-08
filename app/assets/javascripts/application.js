@@ -6,4 +6,11 @@
 
 // = require jquery
 // = require jquery_ujs
+// = require bootstrap-modal
+// = require bootstrap-alerts
+// = require bootstrap-twipsy
+// = require bootstrap-popover
+// = require bootstrap-dropdown
+// = require bootstrap-scrollspy
+// = require bootstrap-tabs
 // = require_tree .

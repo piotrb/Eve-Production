@@ -11,6 +11,10 @@ gem "airbrake"
 gem 'jquery-rails'
 gem "activerecord-import"
 
+gem "omniauth"
+gem "ruby-openid", :require => "openid"
+gem 'dalli'
+
 group :assets do
   gem 'sass-rails', "~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111008191806) do
+ActiveRecord::Schema.define(:version => 20111008202125) do
 
   create_table "characters", :force => true do |t|
     t.string   "name"
@@ -109,5 +109,13 @@ ActiveRecord::Schema.define(:version => 20111008191806) do
 
   add_index "prices", ["location_id"], :name => "index_prices_on_location_id"
   add_index "prices", ["typeid"], :name => "index_prices_on_typeid"
+
+  create_table "users", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
