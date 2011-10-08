@@ -20,7 +20,10 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: eve_production_dev
+  host: 127.0.0.1
+  username: dev
+  password: dev
   pool: 5
   timeout: 5000
