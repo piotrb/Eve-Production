@@ -7,7 +7,6 @@ gem "pg"
 gem 'thin'
 gem 'json'
 gem 'heroku'
-#gem "airbrake"
 gem 'jquery-rails'
 gem "activerecord-import", :require => false
 
@@ -26,6 +25,7 @@ group :development do
 end
 
 group :production do
+  gem 'exception_notification', :require => 'exception_notifier'
 end
 
 group :test, :development do
