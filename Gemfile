@@ -7,7 +7,7 @@ gem "pg"
 gem 'thin'
 gem 'json'
 gem 'heroku'
-gem "airbrake"
+#gem "airbrake"
 gem 'jquery-rails'
 gem "activerecord-import"
 
