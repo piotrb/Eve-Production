@@ -4,22 +4,42 @@
   <title>EveProduction</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
+  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-  <div>
-
-    <div class="header">
-      <%= link_to "dashboard", root_path %> |
-      <%= link_to "locations", locations_path %>
+  <div class="topbar">
+    <div class="fill">
+      <div class="container">
+        <a class="brand" href="#">Eve Production</a>
+        <ul class="nav">
+          <li><%= link_to "Dashboard", root_path %></li>
+          <li><%= link_to "Characters", characters_path %></li>
+          <li><%= link_to "Locations", locations_path %></li>
+        </ul>
+      </div>
     </div>
-
-    <div class="body">
-      <%= yield %>
-    </div>
-
   </div>
+
+  <div class="container">
+
+    <div class="content">
+      <div class="page-header">
+        <h1>Page name <small>Supporting text or tagline</small></h1>
+      </div>
+      <div class="row">
+        <div class="span16">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; T-P-L.com 2011</p>
+    </footer>
+
+  </div> <!-- /container -->
 
 </body>
 </html>

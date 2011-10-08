@@ -1,5 +1,7 @@
 EveProduction::Application.routes.draw do
 
+  resources :characters
+
   resources :locations
   resources :prices
 

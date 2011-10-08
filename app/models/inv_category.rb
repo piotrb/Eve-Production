@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: invcategories
+#
+#  categoryid   :integer         not null, primary key
+#  categoryname :string(100)
+#  description  :string(3000)
+#  iconid       :integer
+#  published    :integer(2)
+#
+
 class InvCategory < EveModel
 
   set_table_name "invcategories"

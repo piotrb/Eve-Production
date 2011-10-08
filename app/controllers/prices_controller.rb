@@ -45,7 +45,7 @@ class PricesController < ApplicationController
 
     respond_to do |format|
       if @price.save
-        format.html { redirect_to :controller => :dashboard, :action => :info, :id => @price.typeID }
+        format.html { redirect_to :controller => :dashboard, :action => :info, :id => @price.typeid }
         format.xml  { render :xml => @price, :status => :created, :location => @price }
       else
         format.html { render :action => "new" }
@@ -61,7 +61,7 @@ class PricesController < ApplicationController
 
     respond_to do |format|
       if @price.update_attributes(params[:price])
-        format.html { redirect_to :controller => :dashboard, :action => :info, :id => @price.typeID }
+        format.html { redirect_to :controller => :dashboard, :action => :info, :id => @price.typeid }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -77,7 +77,7 @@ class PricesController < ApplicationController
     @price.destroy
 
     respond_to do |format|
-      format.html { redirect_to :controller => :dashboard, :action => :info, :id => @price.typeID }
+      format.html { redirect_to :controller => :dashboard, :action => :info, :id => @price.typeid }
       format.xml  { head :ok }
     end
   end

@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: invtypematerials
+#
+#  typeid         :integer         not null
+#  materialtypeid :integer         not null
+#  quantity       :integer         default(0), not null
+#
+
 class InvTypeMaterial < EveModel
 
   set_table_name "invtypematerials"

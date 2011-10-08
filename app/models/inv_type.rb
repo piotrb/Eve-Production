@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: invtypes
+#
+#  typeid              :integer         not null, primary key
+#  groupid             :integer(2)
+#  typename            :string(100)
+#  description         :string(3000)
+#  graphicid           :integer
+#  radius              :float
+#  mass                :float
+#  volume              :float
+#  capacity            :float
+#  portionsize         :integer
+#  raceid              :integer(2)
+#  baseprice           :decimal(19, 4)
+#  published           :integer(2)
+#  marketgroupid       :integer(2)
+#  chanceofduplicating :float
+#  iconid              :integer
+#
+
 class InvType < EveModel
 
   set_table_name "invtypes"

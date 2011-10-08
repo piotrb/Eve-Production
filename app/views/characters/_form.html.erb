@@ -1,0 +1,33 @@
+<%= form_for(@character) do |f| %>
+  <% if @character.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@character.errors.count, "error") %> prohibited this character from being saved:</h2>
+
+      <ul>
+      <% @character.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :charid %><br />
+    <%= f.number_field :charid %>
+  </div>
+  <div class="field">
+    <%= f.label :pe_skill %><br />
+    <%= f.number_field :pe_skill %>
+  </div>
+  <div class="field">
+    <%= f.label :industry_skill %><br />
+    <%= f.number_field :industry_skill %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
