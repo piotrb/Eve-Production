@@ -48,7 +48,7 @@
           <li><%= price.price %> @ <%= price.location.name %> [<%= link_to "edit", [:edit, price] %>] [<%= link_to "del", [price], :method => :delete %>]</li>
         <% end -%>
       </ul>
-      <%= link_to "add", new_price_path(:typeID => item) %>
+      <%= link_to "add", new_price_path(:typeid => item) %>
     </li>
   </ul>
   <% if item.created_by_blueprint -%>

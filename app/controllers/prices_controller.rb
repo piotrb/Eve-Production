@@ -25,7 +25,7 @@ class PricesController < ApplicationController
   # GET /prices/new.xml
   def new
     @price = Price.new
-    @price.typeID ||= params[:typeID]
+    @price.typeid ||= params[:typeid]
 
     respond_to do |format|
       format.html # new.html.erb
