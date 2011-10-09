@@ -1,83 +1,56 @@
 class LocationsController < ApplicationController
-  # GET /locations
-  # GET /locations.xml
+
+  before_filter :require_login
+
+  before_filter :get_collection
+  before_filter :get_single, :only => [:show, :new, :edit, :create, :update, :destroy]
+
+  respond_to :html, :xml, :json
+
   def index
-    @locations = Location.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @locations }
-    end
+    respond_with(@locations)
   end
 
-  # GET /locations/1
-  # GET /locations/1.xml
   def show
-    @location = Location.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @location }
-    end
+    respond_with(@location)
   end
 
-  # GET /locations/new
-  # GET /locations/new.xml
   def new
-    @location = Location.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @location }
-    end
+    respond_with(@location)
   end
 
-  # GET /locations/1/edit
   def edit
-    @location = Location.find(params[:id])
+    respond_with(@location)
   end
 
-  # POST /locations
-  # POST /locations.xml
   def create
-    @location = Location.new(params[:location])
-
-    respond_to do |format|
-      if @location.save
-        format.html { redirect_to(@location, :notice => 'Location was successfully created.') }
-        format.xml  { render :xml => @location, :status => :created, :location => @location }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @location.errors, :status => :unprocessable_entity }
-      end
-    end
+    @location.attributes = params[:location]
+    @location.save
+    respond_with(@location, :location => locations_path, :notice => 'Location was successfully created.' )
   end
 
-  # PUT /locations/1
-  # PUT /locations/1.xml
   def update
-    @location = Location.find(params[:id])
-
-    respond_to do |format|
-      if @location.update_attributes(params[:location])
-        format.html { redirect_to(@location, :notice => 'Location was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @location.errors, :status => :unprocessable_entity }
-      end
-    end
+    @location.attributes = params[:location]
+    @location.save
+    respond_with(@location, :location => locations_path, :notice => 'Location was successfully updated.' )
   end
 
-  # DELETE /locations/1
-  # DELETE /locations/1.xml
   def destroy
-    @location = Location.find(params[:id])
     @location.destroy
+    respond_with(@location, :location => locations_path, :notice => 'Location was successfully deleted.' )
+  end
 
-    respond_to do |format|
-      format.html { redirect_to(locations_url) }
-      format.xml  { head :ok }
+protected
+  def get_collection
+    @locations = current_user.locations
+  end
+
+  def get_single
+    if params[:id]
+      @location = @locations.find(params[:id])
+    else
+      @location = @locations.build
     end
   end
+
 end

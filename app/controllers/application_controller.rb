@@ -6,9 +6,17 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+protected
+  def require_login
+    unless signed_in?
+      redirect_to "/auth/google"
+      return false
+    end
+  end
+
 private
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= User.where(:id => session[:user_id]).first if session[:user_id]
   end
 
 end

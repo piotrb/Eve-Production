@@ -34,7 +34,9 @@ class InvType < ActiveRecord::Base
   has_one :inv_blueprint_type, :foreign_key => "blueprinttypeid"
   has_one :created_by_blueprint, :foreign_key => "producttypeid", :class_name => "InvBlueprintType"
 
-  has_many :prices, :foreign_key => "typeid"
+  def prices_for(user)
+    user.prices.for(self)
+  end
 
   def materials
     out = inv_type_materials.to_a
@@ -44,29 +46,30 @@ class InvType < ActiveRecord::Base
     out
   end
 
-  def cheapest_market_price
-    prices.sort_by { |p| p.price }.first
+  def cheapest_market_price_for(user)
+    prices_for(user).sort_by { |p| p.price }.first
   end
 
-  def actual_cheapest_price
+  def actual_cheapest_price_for(user)
+    cmp = cheapest_market_price_for(user)
     [
-      cheapest_market_price ? [cheapest_market_price.price, cheapest_market_price.location.name] : nil,
-      material_price,
-      produced_price,
+      cmp ? [cmp.price, cmp.location.name] : nil,
+      material_price_for(user),
+      produced_price_for(user),
     ].compact.sort_by { |(p,n)| p.to_f }.first
   end
 
-  def produced_price
+  def produced_price_for(user)
     if created_by_blueprint
-      created_by_blueprint.blueprint.actual_cheapest_price
+      created_by_blueprint.blueprint.actual_cheapest_price_for(user)
     end
   end
 
-  def material_price
+  def material_price_for(user)
     unless inv_blueprint_type.product.materials.empty?
       sum = [0,"Mixed"]
       inv_blueprint_type.product.materials.each { |m|
-        cp = m.material.actual_cheapest_price
+        cp = m.material.actual_cheapest_price_for(user)
         return nil if cp.nil?
         sum[0] += (m.quantity * cp.first)
       }

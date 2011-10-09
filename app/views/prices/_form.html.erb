@@ -18,7 +18,7 @@
   </p>
 
   <p>
-    Location: <%= f.select :location_id, Location.all %>
+    Location: <%= f.select :location_id, current_user.locations %>
   </p>
 
   <div class="actions">

@@ -12,11 +12,15 @@
 
 class User < ActiveRecord::Base
 
-  def self.create_with_omniauth(auth)
+  has_many :locations, :dependent => :destroy
+  has_many :characters, :dependent => :destroy
+  has_many :prices, :through => :locations
+
+  def self.create_with_omniauth(auth, profile)
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.name = auth["user_info"]["name"]
+      user.name = profile["name"]
     end
   end
 

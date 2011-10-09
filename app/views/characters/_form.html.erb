@@ -11,23 +11,38 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :charid %><br />
-    <%= f.number_field :charid %>
-  </div>
-  <div class="field">
-    <%= f.label :pe_skill %><br />
-    <%= f.number_field :pe_skill %>
-  </div>
-  <div class="field">
-    <%= f.label :industry_skill %><br />
-    <%= f.number_field :industry_skill %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <fieldset>
+
+    <div class="clearfix">
+      <%= f.label :name %>
+      <div class="input">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+
+    <div class="clearfix">
+      <%= f.label :charid %>
+      <div class="input">
+        <%= f.number_field :charid %>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :pe_skill %>
+      <div class="input">
+        <%= f.number_field :pe_skill %>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :industry_skill %>
+      <div class="input">
+        <%= f.number_field :industry_skill %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit :class => "btn primary" %>
+    </div>
+
+  </fieldset>
+
 <% end %>

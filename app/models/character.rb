@@ -9,9 +9,12 @@
 #  industry_skill :integer
 #  created_at     :datetime
 #  updated_at     :datetime
+#  user_id        :integer
 #
 
 class Character < ActiveRecord::Base
+
+  belongs_to :user
 
   def portrait_url(size = :small)
     size = {

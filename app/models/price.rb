@@ -11,5 +11,13 @@
 #
 
 class Price < ActiveRecord::Base
+
   belongs_to :location
+
+  validates_presence_of :location
+
+  scope :for, proc { |item|
+    where(:typeid => item.typeid)
+  }
+
 end

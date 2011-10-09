@@ -1,4 +1,7 @@
 class PricesController < ApplicationController
+
+  before_filter :require_login
+
   # GET /prices
   # GET /prices.xml
   def index

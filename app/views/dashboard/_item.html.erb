@@ -19,8 +19,8 @@
     </li>
     <% end %>
     <li>Price: 
-    <% if item.actual_cheapest_price %>
-    <%= number_with_precision item.actual_cheapest_price.first, :delimiter => "," %> @ <%= item.actual_cheapest_price.last %>
+    <% if acp = item.actual_cheapest_price_for(current_user) %>
+    <%= number_with_precision acp.first, :delimiter => "," %> @ <%= acp.last %>
     <% else -%>
     none
     <% end %>
@@ -29,8 +29,8 @@
       <ul>
         <% item.inv_blueprint_type.product.materials.each do |mat| -%>
           <li><%= mat.quantity %> x <%= link_to mat.material.typename, :action => "info", :id => mat.material.id %> --  
-            <% if mat.material.actual_cheapest_price -%>
-             <%= mat.material.actual_cheapest_price.first %> @ <%= mat.material.actual_cheapest_price.last %>
+            <% if acp = mat.material.actual_cheapest_price_for(current_user) -%>
+             <%= acp.first %> @ <%= acp.last %>
             <% else -%>
               no price
             <% end -%>
@@ -44,7 +44,7 @@
     <li>
       Prices:
       <ul>
-        <% item.prices.each do |price| -%>
+        <% item.prices_for(current_user).each do |price| -%>
           <li><%= price.price %> @ <%= price.location.name %> [<%= link_to "edit", [:edit, price] %>] [<%= link_to "del", [price], :method => :delete %>]</li>
         <% end -%>
       </ul>

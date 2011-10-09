@@ -2,7 +2,11 @@ class SessionsController < ApplicationController
 
   def create
     auth = request.env["omniauth.auth"]
-    user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_with_omniauth(auth)
+    token = auth["credentials"]["token"]
+    conn = Faraday.new(:url => 'https://www.googleapis.com')
+    response = conn.get "/oauth2/v1/userinfo?alt=json&access_token=#{token}"
+    profile = JSON.load(response.body)
+    user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_with_omniauth(auth, profile)
     session[:user_id] = user.id
     redirect_to root_url, :notice => "Signed in!"
   end
