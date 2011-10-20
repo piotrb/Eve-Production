@@ -11,7 +11,6 @@ gem 'jquery-rails'
 gem "activerecord-import", :require => false
 
 gem "omniauth"
-gem "ruby-openid", :require => "openid"
 gem 'dalli'
 
 group :assets do

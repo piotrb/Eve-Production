@@ -10,7 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111009000728) do
+ActiveRecord::Schema.define(:version => 20111009024041) do
+
+  create_table "blueprints", :force => true do |t|
+    t.integer  "typeid"
+    t.integer  "material_level"
+    t.integer  "productivity_level"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "characters", :force => true do |t|
     t.string   "name"

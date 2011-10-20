@@ -5,6 +5,7 @@
   <li>Market Group: <%= item.inv_market_group.full_name if item.inv_market_group %> (<%= item.inv_market_group.id if item.inv_market_group %>)</li>
   <% if item.inv_group.categoryid == 9 # blueprints -%>
   <ul>
+    <li><%= link_to "Add to My Blueprints", new_blueprint_path(:typeid => item.typeid) %></li>
     <li>Product: <%= link_to item.inv_blueprint_type.product.typename, :action => "info", :id => item.inv_blueprint_type.product.id %></li>
     <% if item.inv_blueprint_type.parent_blueprint %>
     <li>Parent Blueprint: <%= link_to item.inv_blueprint_type.parent_blueprint.blueprint.typename, :action => "info", :id => item.inv_blueprint_type.parent_blueprint.blueprint.id %></li>
@@ -24,6 +25,11 @@
     <% else -%>
     none
     <% end %>
+    </li>
+    <li>
+      wastefactor: <%= item.inv_blueprint_type.wastefactor %><br>
+      materialmodifier: <%= item.inv_blueprint_type.materialmodifier %><br>
+      techlevel: <%= item.inv_blueprint_type.techlevel %><br>
     </li>
     <li>Materials:
       <ul>

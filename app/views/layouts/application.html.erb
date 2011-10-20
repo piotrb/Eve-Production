@@ -15,9 +15,10 @@
         <a class="brand" href="#">Eve Production</a>
         <ul class="nav">
           <li><%= link_to "Dashboard", root_path %></li>
-          <li><%= link_to "Locations", locations_path %></li>
           <% if signed_in? %>
+            <li><%= link_to "Locations", locations_path %></li>
             <li><%= link_to "Characters", characters_path %></li>
+            <li><%= link_to "My Blueprints", blueprints_path %></li>
           <% end %>
         </ul>
 

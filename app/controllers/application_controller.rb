@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 protected
   def require_login
     unless signed_in?
-      redirect_to "/auth/google"
+      redirect_to "/auth/google_oauth2"
       return false
     end
   end

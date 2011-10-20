@@ -12,8 +12,9 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    auth = request.env["omniauth.auth"]
-    raise auth.inspect
+    session[:user_id] = nil
+    flash[:error] = params[:message]
+    redirect_to :root
   end
 
   def destroy
