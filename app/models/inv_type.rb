@@ -35,7 +35,7 @@ class InvType < ActiveRecord::Base
   has_one :created_by_blueprint, :foreign_key => "producttypeid", :class_name => "InvBlueprintType"
 
   def prices_for(user)
-    user.prices.for(self)
+    user ? user.prices.for(self) : nil
   end
 
   def materials
