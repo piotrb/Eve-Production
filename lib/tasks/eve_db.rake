@@ -10,6 +10,7 @@ namespace :eve do
         invmarketgroups
         invtypes
         invtypematerials
+        ramtyperequirements
       ),
       :db => {
         :user => "dev",
@@ -45,7 +46,9 @@ namespace :eve do
     end
   end
 
-  task :extract_seeds => :environment do
+  task :ensure_extracted_db do
+
+    raise "must run in RAILS_ENV=dump" unless Rails.env.dump?
 
     $stdout.sync = true
 
@@ -59,6 +62,9 @@ namespace :eve do
     # cleanup the test db
 
     conn.execute "use #{info[:db][:database]}"
+  end
+
+  task :extract_seeds => [:environment, :ensure_extracted_db] do
 
     if ENV['RELOAD']
 
@@ -105,10 +111,12 @@ namespace :eve do
 
     File.open("db/eve/schema.rb", "w") do |schema_handle|
 
+      buffer = StringIO.new
+
       info[:tables].each { |t|
         puts "extracting table #{t} ..."
         dumper = ActiveRecord::SchemaDumper.send(:new, conn)
-        dumper.send(:table, t, schema_handle)
+        dumper.send(:table, t, buffer)
         table = Arel::Table.new(t)
         query = table.project(Arel.sql('*'))
         File.open("db/eve/#{t}.dat", "w") do |th|
@@ -118,6 +126,10 @@ namespace :eve do
           }
         end
       }
+
+      buffer.rewind
+
+      schema_handle << buffer.read.downcase
 
     end
 

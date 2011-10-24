@@ -13,6 +13,7 @@ tables = [
   "invmarketgroups",
   "invtypes",
   "invtypematerials",
+  "ramtyperequirements",
 ]
 
 def create_table(*p, &b)
@@ -60,7 +61,7 @@ tables.each { |t|
       if row[0] == 0
         flush_data[n]
         o = cc.last
-        ActiveRecord::Base.connection.execute("update #{t} set #{pk}=0 where #{pk}=#{o[pk]}") unless o[pk] == 0
+        ActiveRecord::Base.connection.execute("update #{t} set #{pk}=0 where #{pk}=#{o[pk]}") unless o.nil? || o[pk] == 0
       end
       if n % 100 == 0
         flush_data[n]

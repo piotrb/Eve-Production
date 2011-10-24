@@ -125,6 +125,15 @@ ActiveRecord::Schema.define(:version => 20111009024041) do
   add_index "prices", ["location_id"], :name => "index_prices_on_location_id"
   add_index "prices", ["typeid"], :name => "index_prices_on_typeid"
 
+  create_table "ramtyperequirements", :id => false, :force => true do |t|
+    t.integer "typeid",                      :null => false
+    t.integer "activityid",     :limit => 2, :null => false
+    t.integer "requiredtypeid",              :null => false
+    t.integer "quantity"
+    t.float   "damageperjob"
+    t.integer "recycle",        :limit => 2
+  end
+
   create_table "users", :force => true do |t|
     t.string   "provider"
     t.string   "uid"

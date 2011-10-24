@@ -21,6 +21,7 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'mysql2'
 end
 
 group :production do
