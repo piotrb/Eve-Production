@@ -33,6 +33,7 @@ class InvType < ActiveRecord::Base
   has_many :inv_type_materials, :foreign_key => "typeid"
   has_one :inv_blueprint_type, :foreign_key => "blueprinttypeid"
   has_one :created_by_blueprint, :foreign_key => "producttypeid", :class_name => "InvBlueprintType"
+  has_many :ram_type_requirements, :foreign_key => "typeid"
 
   def prices_for(user)
     user ? user.prices.for(self) : Price.where("false")

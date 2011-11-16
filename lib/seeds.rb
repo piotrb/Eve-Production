@@ -64,6 +64,7 @@ class Seeds
       "invtypes",
       "invtypematerials",
       "ramtyperequirements",
+      "ramactivities",
     ]
   end
 
@@ -91,8 +92,6 @@ class Seeds
     puts "loading #{table} ..."
 
     batch_size = 500
-
-    drop_table(table)
 
     eval(File.read("db/eve/#{table}_schema.rb"), binding, "db/eve/#{table}_schema.rb", 1)
 

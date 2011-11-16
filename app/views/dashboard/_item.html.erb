@@ -44,6 +44,32 @@
         <% end -%>
       </ul>
     </li>
+    <% unless item.ram_type_requirements.empty? %>
+    <li>
+      RAM Requirements:
+      <ul>
+        <% item.ram_type_requirements.group_by { |ram| ram.ram_activity }.each do |act, rams| -%>
+        <li>
+          <%= act.activityname %>
+          <ul>
+            <% rams.group_by { |ram| ram.requirement.inv_group.inv_category }.each do |cat, rams2| -%>
+            <li>
+              <%= cat.categoryname %>
+              <ul>
+                <% rams2.each do |ram| -%>
+                <li>
+                  <%= render :partial => "ram_req_row", :locals => { :ram => ram } %>
+                </li>
+                <% end -%>
+              </ul>
+            </li>
+            <% end -%>
+          </ul>
+        </li>
+        <% end -%>
+      </ul>
+    </li>
+    <% end %>
   </ul>
   <% end -%>
   <ul>

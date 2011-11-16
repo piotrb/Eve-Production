@@ -11,6 +11,7 @@ namespace :eve do
         invtypes
         invtypematerials
         ramtyperequirements
+        ramactivities
       ),
       :db => {
         :user => "dev",

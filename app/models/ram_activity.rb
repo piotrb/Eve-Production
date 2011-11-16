@@ -10,12 +10,11 @@
 #  recycle        :integer(2)
 #
 
-class RamTypeRequirement < ActiveRecord::Base
+class RamActivity < ActiveRecord::Base
 
-  set_table_name "ramtyperequirements"
+  set_table_name "ramactivities"
 
-  belongs_to :inv_type, :foreign_key => "typeid"
-  belongs_to :requirement, :foreign_key => "requiredtypeid", :class_name => "InvType"
-  belongs_to :ram_activity, :foreign_key => "activityid"
+#  belongs_to :inv_type, :foreign_key => "typeid"
+#  belongs_to :requirement, :foreign_key => "requiredtypeid", :class_name => "InvType"
 
 end
