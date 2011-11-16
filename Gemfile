@@ -8,9 +8,9 @@ gem 'thin'
 gem 'json'
 gem 'heroku'
 gem 'jquery-rails'
-gem "activerecord-import", :require => false
 
 gem "omniauth"
+gem "omniauth-google-oauth2"
 gem 'dalli'
 
 group :assets do
@@ -22,6 +22,7 @@ end
 group :development do
   gem 'annotate'
   gem 'mysql2'
+  gem 'unicorn'
 end
 
 group :production do

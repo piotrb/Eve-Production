@@ -46,6 +46,21 @@ namespace :eve do
     end
   end
 
+  def dump_table_schema(table)
+    File.open("db/eve/#{table}_schema.rb", "w") do |schema_handle|
+
+      buffer = StringIO.new
+
+      dumper = ActiveRecord::SchemaDumper.send(:new, conn)
+      dumper.send(:table, table, buffer)
+
+      buffer.rewind
+
+      schema_handle << buffer.read.downcase
+
+    end
+  end
+
   task :ensure_extracted_db do
 
     raise "must run in RAILS_ENV=dump" unless Rails.env.dump?
@@ -109,29 +124,18 @@ namespace :eve do
       File.unlink(f)
     }
 
-    File.open("db/eve/schema.rb", "w") do |schema_handle|
-
-      buffer = StringIO.new
-
-      info[:tables].each { |t|
-        puts "extracting table #{t} ..."
-        dumper = ActiveRecord::SchemaDumper.send(:new, conn)
-        dumper.send(:table, t, buffer)
-        table = Arel::Table.new(t)
-        query = table.project(Arel.sql('*'))
-        File.open("db/eve/#{t}.dat", "w") do |th|
-          r = conn.execute(query.to_sql)
-          r.each { |row|
-            th.write(row.to_json + "\n")
-          }
-        end
-      }
-
-      buffer.rewind
-
-      schema_handle << buffer.read.downcase
-
-    end
+    info[:tables].each { |t|
+      puts "extracting table #{t} ..."
+      dump_table_schema(t)
+      table = Arel::Table.new(t)
+      query = table.project(Arel.sql('*'))
+      File.open("db/eve/#{t}.dat", "w") do |th|
+        r = conn.execute(query.to_sql)
+        r.each { |row|
+          th.write(row.to_json + "\n")
+        }
+      end
+    }
 
   end
 

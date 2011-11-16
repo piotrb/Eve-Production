@@ -1,5 +1,3 @@
-require 'activerecord-import'
-
 if defined? ExceptionNotifier
   Rails.application.config.middleware.use ExceptionNotifier,
     :email_prefix => "[EVE] ",

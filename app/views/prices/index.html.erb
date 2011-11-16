@@ -1,5 +1,9 @@
 <h1>Listing prices</h1>
 
+<% if @location %>
+<h2>At Location: <%= @location.name %></h2>
+<% end %>
+
 <table>
   <tr>
     <th></th>
@@ -9,9 +13,10 @@
 
 <% @prices.each do |price| %>
   <tr>
-    <td><%= link_to 'Show', price %></td>
-    <td><%= link_to 'Edit', edit_price_path(price) %></td>
-    <td><%= link_to 'Destroy', price, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%#= price.inv_type.typename %></td>
+    <td><%= link_to 'Show', [@location, price].compact %></td>
+    <td><%= link_to 'Edit', [:edit, @location, price].compact %></td>
+    <td><%= link_to 'Destroy', [@location, price].compact, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
@@ -19,3 +24,7 @@
 <br />
 
 <%= link_to 'New Price', new_price_path %>
+
+<% if @location %>
+<%= link_to "New Price @ #{@location.name}", [:new, @location, :price] %>
+<% end %>

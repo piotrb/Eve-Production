@@ -8,7 +8,9 @@ EveProduction::Application.routes.draw do
 
   resources :characters
 
-  resources :locations
+  resources :locations do
+    resources :prices
+  end
   resources :prices
 
   resources :dashboard do

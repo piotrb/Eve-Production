@@ -2,10 +2,12 @@ class PricesController < ApplicationController
 
   before_filter :require_login
 
+  before_filter :get_location
+
   # GET /prices
   # GET /prices.xml
   def index
-    @prices = Price.all
+    @prices = @price_source.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +18,7 @@ class PricesController < ApplicationController
   # GET /prices/1
   # GET /prices/1.xml
   def show
-    @price = Price.find(params[:id])
+    @price = @price_source.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,7 +29,7 @@ class PricesController < ApplicationController
   # GET /prices/new
   # GET /prices/new.xml
   def new
-    @price = Price.new
+    @price = @price_source.new
     @price.typeid ||= params[:typeid]
 
     respond_to do |format|
@@ -38,13 +40,13 @@ class PricesController < ApplicationController
 
   # GET /prices/1/edit
   def edit
-    @price = Price.find(params[:id])
+    @price = @price_source.find(params[:id])
   end
 
   # POST /prices
   # POST /prices.xml
   def create
-    @price = Price.new(params[:price])
+    @price = @price_source.new(params[:price])
 
     respond_to do |format|
       if @price.save
@@ -60,7 +62,7 @@ class PricesController < ApplicationController
   # PUT /prices/1
   # PUT /prices/1.xml
   def update
-    @price = Price.find(params[:id])
+    @price = @price_source.find(params[:id])
 
     respond_to do |format|
       if @price.update_attributes(params[:price])
@@ -76,7 +78,7 @@ class PricesController < ApplicationController
   # DELETE /prices/1
   # DELETE /prices/1.xml
   def destroy
-    @price = Price.find(params[:id])
+    @price = @price_source.find(params[:id])
     @price.destroy
 
     respond_to do |format|
@@ -84,4 +86,16 @@ class PricesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+protected
+
+  def get_location
+    if params[:location_id]
+      @location = Location.find(params[:location_id])
+      @price_source = @location.prices
+    else
+      @price_source = Price
+    end
+  end
+
 end
