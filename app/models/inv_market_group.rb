@@ -3,11 +3,11 @@
 # Table name: invmarketgroups
 #
 #  marketgroupid   :integer         not null, primary key
-#  parentgroupid   :integer(2)
+#  parentgroupid   :integer
 #  marketgroupname :string(100)
 #  description     :string(3000)
 #  iconid          :integer
-#  hastypes        :integer(2)
+#  hastypes        :integer
 #
 
 class InvMarketGroup < ActiveRecord::Base

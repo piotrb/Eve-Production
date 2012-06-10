@@ -97,14 +97,21 @@ class Seeds
 
     t = table
 
-    cols = ActiveRecord::Base.connection.columns(t)
+    # cols = ActiveRecord::Base.connection.columns(t)
     pk = ActiveRecord::Base.connection.primary_key(t)
 
     cc = Class.new(ModelBase) do
-      set_table_name t
-      set_primary_key pk
+      self.table_name = t
+      self.primary_key = pk
+      # attr_accessible cols
+    end
+
+    cols = cc.columns
+
+    cc.class_eval do
       attr_accessible cols
     end
+
 
     lines = `cat db/eve/#{t}.dat | wc -l`.strip.to_i
 
@@ -126,8 +133,9 @@ class Seeds
         data << row
         if row[0] == 0
           flush_data[n]
-          o = cc.last
-          conn.execute("update #{t} set #{pk}=0 where #{pk}=#{o[pk]}") unless o.nil? || o[pk] == 0
+          r = conn.execute("select * from #{t}")
+          o = r.first
+          conn.execute("update #{t} set #{pk}=0 where #{pk}=#{o[pk]}") unless o.nil? || o[pk] == "0"
         end
         if n % batch_size == 0
           flush_data[n]

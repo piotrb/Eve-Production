@@ -9,6 +9,6 @@
 
 $stdout.sync = true
 
-require 'lib/seeds'
+require Rails.root + 'lib/seeds'
 
 Seeds.load_all

@@ -3,17 +3,17 @@
 # Table name: invgroups
 #
 #  groupid              :integer         not null, primary key
-#  categoryid           :integer(2)
+#  categoryid           :integer
 #  groupname            :string(100)
 #  description          :string(3000)
 #  iconid               :integer
-#  usebaseprice         :integer(2)
-#  allowmanufacture     :integer(2)
-#  allowrecycler        :integer(2)
-#  anchored             :integer(2)
-#  anchorable           :integer(2)
-#  fittablenonsingleton :integer(2)
-#  published            :integer(2)
+#  usebaseprice         :integer
+#  allowmanufacture     :integer
+#  allowrecycler        :integer
+#  anchored             :integer
+#  anchorable           :integer
+#  fittablenonsingleton :integer
+#  published            :integer
 #
 
 class InvGroup < ActiveRecord::Base

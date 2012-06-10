@@ -3,19 +3,18 @@
 # Table name: invtypes
 #
 #  typeid              :integer         not null, primary key
-#  groupid             :integer(2)
+#  groupid             :integer
 #  typename            :string(100)
 #  description         :string(3000)
-#  graphicid           :integer
 #  radius              :float
 #  mass                :float
 #  volume              :float
 #  capacity            :float
 #  portionsize         :integer
-#  raceid              :integer(2)
+#  raceid              :integer
 #  baseprice           :decimal(19, 4)
-#  published           :integer(2)
-#  marketgroupid       :integer(2)
+#  published           :integer
+#  marketgroupid       :integer
 #  chanceofduplicating :float
 #  iconid              :integer
 #

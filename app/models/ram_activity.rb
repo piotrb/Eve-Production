@@ -1,13 +1,12 @@
 # == Schema Information
 #
-# Table name: ramtyperequirements
+# Table name: ramactivities
 #
-#  typeid         :integer         not null
-#  activityid     :integer(2)      not null
-#  requiredtypeid :integer         not null
-#  quantity       :integer
-#  damageperjob   :float
-#  recycle        :integer(2)
+#  activityid   :integer         not null, primary key
+#  activityname :string(100)
+#  iconno       :string(5)
+#  description  :string(1000)
+#  published    :integer
 #
 
 class RamActivity < ActiveRecord::Base

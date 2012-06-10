@@ -6,7 +6,7 @@
 #  categoryname :string(100)
 #  description  :string(3000)
 #  iconid       :integer
-#  published    :integer(2)
+#  published    :integer
 #
 
 class InvCategory < ActiveRecord::Base
