@@ -2,6 +2,6 @@
     t.string  "categoryname", :limit => 100
     t.string  "description",  :limit => 3000
     t.integer "iconid"
-    t.integer "published",    :limit => 1
+    t.integer "published"
   end
 

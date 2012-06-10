@@ -7,14 +7,16 @@
 #  charid         :integer
 #  pe_skill       :integer
 #  industry_skill :integer
-#  created_at     :datetime
-#  updated_at     :datetime
+#  created_at     :datetime        not null
+#  updated_at     :datetime        not null
 #  user_id        :integer
 #
 
 class Character < ActiveRecord::Base
 
   belongs_to :user
+
+  attr_accessible :name, :charid, :pe_skill, :industry_skill
 
   def portrait_url(size = :small)
     size = {

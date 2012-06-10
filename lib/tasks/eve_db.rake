@@ -4,15 +4,20 @@ namespace :eve do
     h = {
       :base => "Incarna_1.1.45834_db_mysql_v2",
       :tables => %w(
-        invblueprinttypes
-        invcategories
-        invgroups
-        invmarketgroups
-        invtypes
-        invtypematerials
-        ramtyperequirements
-        ramactivities
+        invBlueprintTypes
+        invCategories
+        invGroups
+        invMarketGroups
+        invTypes
+        invTypeMaterials
+        ramTypeRequirements
+        ramActivities
       ),
+      # invMetaGroups
+      # invMetaTypes
+      # invNames
+      # invItems
+      # invPositions
       :db => {
         :user => "dev",
         :password => "dev",
@@ -48,7 +53,7 @@ namespace :eve do
   end
 
   def dump_table_schema(table)
-    File.open("db/eve/#{table}_schema.rb", "w") do |schema_handle|
+    File.open("db/eve/#{table.downcase}_schema.rb", "w") do |schema_handle|
 
       buffer = StringIO.new
 
@@ -62,6 +67,26 @@ namespace :eve do
     end
   end
 
+  task :download do
+    version = "inferno-1.0_70633"
+    Dir.chdir("tmp") do
+      info[:tables].each { |table|
+        fn = "#{table}.sql.bz2"
+        url = "http://evedump.icyone.net/#{version}/bzip2/#{fn}"
+        puts "Checking #{table} ..."
+        length = `curl -s --head #{url.inspect}`.split("\n").grep(/Content-Length/).first.strip[/\d+$/].to_i
+        if File.exist?(fn) && File.stat(fn).size != length
+          puts "  File size doesn't match, downloading ..."
+          sh "wget -cnv #{url.inspect}"
+        end
+        unless File.exist?(fn)
+          puts "  File not found, downloading ..."
+          sh "wget -nv #{url.inspect}"
+        end
+      }
+    end
+  end
+
   task :ensure_extracted_db do
 
     raise "must run in RAILS_ENV=dump" unless Rails.env.dump?
@@ -70,10 +95,12 @@ namespace :eve do
 
     file = "#{info[:base]}.zip"
 
-    unless File.exist?(info[:sql])
-      puts "unzipping ..."
-      sh "unzip #{info[:zip].inspect}"
-    end
+    info[:tables].each { |table|
+      unless File.exist?("tmp/#{table}.sql")
+        puts "unzipping #{table}"
+        sh "bunzip2 tmp/#{table}.sql.bz2"
+      end
+    }
 
     # cleanup the test db
 
@@ -89,33 +116,35 @@ namespace :eve do
         conn.drop_table(t)
       }
 
-      puts "pre-processing sql ..."
-      total_count = 0
-      total_size = File.size(info[:sql])
-      size = 0
-      last = 0
-      process_sql_file(info[:sql]) do |statement|
-        size += statement.length
-        total_count += 1
-        if last < ((size * 10) / total_size)
-          print "%d%% ... " % [(size * 100) / total_size]
-          last = ((size * 10) / total_size)
+      info[:tables].each { |table|
+        puts "processing table: #{table} ..."
+        # puts "  pre-processing sql ..."
+        # total_count = 0
+        fn = "tmp/#{table}.sql"
+        # total_size = File.size(fn)
+        # size = 0
+        # last = 0
+        # process_sql_file(fn) do |statement|
+        #   size += statement.length
+        #   total_count += 1
+        #   if last < ((size * 10) / total_size)
+        #     print "  %d%% ... " % [(size * 100) / total_size]
+        #     last = ((size * 10) / total_size)
+        #   end
+        # end
+        # puts
+        # puts "  found #{total_count} statements ..."
+        puts "  loading sql ..."
+        count = 0
+        process_sql_file(fn) do |statement|
+          count += 1
+          conn.execute(statement)
+          # if count % (total_count / 10) == 0
+            print "  %i ... " % [count]
+          # end
         end
-      end
-      puts
-
-      puts "found #{total_count} statements ..."
-
-      puts "loading sql ..."
-      count = 0
-      process_sql_file(info[:sql]) do |statement|
-        count += 1
-        conn.execute(statement)
-        if count % (total_count / 10) == 0
-          print "%d%% ... " % [(count * 100) / total_count]
-        end
-      end
-      puts
+        puts
+      }
 
     end
 
@@ -130,7 +159,7 @@ namespace :eve do
       dump_table_schema(t)
       table = Arel::Table.new(t)
       query = table.project(Arel.sql('*'))
-      File.open("db/eve/#{t}.dat", "w") do |th|
+      File.open("db/eve/#{t.downcase}.dat", "w") do |th|
         r = conn.execute(query.to_sql)
         r.each { |row|
           th.write(row.to_json + "\n")

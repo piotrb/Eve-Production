@@ -2,6 +2,6 @@
     t.string  "activityname", :limit => 100
     t.string  "iconno",       :limit => 5
     t.string  "description",  :limit => 1000
-    t.integer "published",    :limit => 1
+    t.integer "published"
   end
 
