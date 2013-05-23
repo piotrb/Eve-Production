@@ -1,4 +1,4 @@
-rvm use ruby-1.9.3
+rvm use ruby-2.0.0
 if [[ -e env.sh ]]; then
   . ./env.sh
 fi
