@@ -29,7 +29,6 @@ gem 'jbuilder', '~> 1.0.1'
 
 gem 'bcrypt-ruby'
 
-gem "pg"
 gem 'mysql2'
 
 gem 'puma'
