@@ -1,0 +1,27 @@
+development:
+  adapter: mysql2
+  database: eve_production_dev
+  host: 127.0.0.1
+  username: dev
+  password: dev
+  pool: 5
+  timeout: 5000
+
+dump:
+  adapter: mysql2
+  database: test
+  username: dev
+  password: dev
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  adapter: mysql2
+  database: eve_production_test
+  host: 127.0.0.1
+  username: dev
+  password: dev
+  pool: 5
+  timeout: 5000
+
