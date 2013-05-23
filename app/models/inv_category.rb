@@ -1,7 +1,7 @@
 class InvCategory < ActiveRecord::Base
 
-  set_table_name "invcategories"
-  set_primary_key "categoryid"
+  self.table_name = "invcategories"
+  self.primary_key = "categoryid"
 
   has_many :inv_groups, :foreign_key => "categoryid"
 

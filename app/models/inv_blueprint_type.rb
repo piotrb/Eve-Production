@@ -1,7 +1,7 @@
 class InvBlueprintType < ActiveRecord::Base
 
-  set_table_name "invblueprinttypes"
-  set_primary_key "blueprinttypeid"
+  self.table_name = "invblueprinttypes"
+  self.primary_key = "blueprinttypeid"
 
   belongs_to :blueprint, :class_name => "InvType", :foreign_key => "blueprinttypeid"
   belongs_to :product,   :class_name => "InvType", :foreign_key => "producttypeid"

@@ -1,7 +1,7 @@
 class InvMarketGroup < ActiveRecord::Base
 
-  set_table_name "invmarketgroups"
-  set_primary_key "marketgroupid"
+  self.table_name = "invmarketgroups"
+  self.primary_key = "marketgroupid"
 
   has_many :item_types, :foreign_key => "marketgroupid"
   belongs_to :parent, :foreign_key => "parentgroupid", :class_name => "InvMarketGroup"

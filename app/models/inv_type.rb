@@ -1,7 +1,7 @@
 class InvType < ActiveRecord::Base
 
-  set_table_name "invtypes"
-  set_primary_key "typeid"
+  self.table_name = "invtypes"
+  self.primary_key = "typeid"
 
   scope :items, includes("inv_group").where("invgroups.categoryid in (?)", InvCategory.good_categories).where("invtypes.groupid not in (?)", InvGroup.bad_groups)
 
