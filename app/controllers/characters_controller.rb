@@ -24,13 +24,13 @@ class CharactersController < ApplicationController
   end
 
   def create
-    @character.attributes = params[:character]
+    @character.attributes = character_params
     @character.save
     respond_with(@character, :location => characters_path, :notice => 'Character was successfully created.' )
   end
 
   def update
-    @character.attributes = params[:character]
+    @character.attributes = character_params
     @character.save
     respond_with(@character, :location => characters_path, :notice => 'Character was successfully updated.' )
   end
@@ -52,6 +52,10 @@ protected
     else
       @character = @characters.build
     end
+  end
+
+  def character_params
+    params.require(:character).permit(:charid, :name, :pe_skill, :industry_skill)
   end
 
 end

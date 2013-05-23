@@ -1,0 +1,25 @@
+= form_for(@blueprint) do |f|
+  - if @blueprint.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@blueprint.errors.count, "error")
+        prohibited this blueprint from being saved:
+      %ul
+        - @blueprint.errors.full_messages.each do |msg|
+          %li= msg
+  %fieldset
+    .clearfix
+      = f.hidden_field :typeid
+      = f.label :name
+      .input
+        = text_field_tag "", @blueprint.inv_type.typename, :class => "disabled", :disabled => true
+    .clearfix
+      = f.label :material_level
+      .input
+        = f.number_field :material_level
+    .clearfix
+      = f.label :productivity_level
+      .input
+        = f.number_field :productivity_level
+    .actions
+      = f.submit :class => "btn primary"

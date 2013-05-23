@@ -1,12 +1,3 @@
-# == Schema Information
-#
-# Table name: invtypematerials
-#
-#  typeid         :integer         not null
-#  materialtypeid :integer         not null
-#  quantity       :integer         default(0), not null
-#
-
 class InvTypeMaterial < ActiveRecord::Base
 
   set_table_name "invtypematerials"

@@ -1,0 +1,76 @@
+%ul
+  %li
+    Name: #{link_to item.typename, :action => "info", :id => item.id}(#{item.id})
+  %li
+    Group: #{item.inv_group.groupname} ( #{item.inv_group.id} )
+  %li
+    Group Category: #{item.inv_group.inv_category.categoryname} (#{item.inv_group.inv_category.id})
+  %li
+    Market Group: #{item.inv_market_group.full_name if item.inv_market_group} (#{item.inv_market_group.id if item.inv_market_group})
+  - if item.inv_group.categoryid == 9 # blueprints
+    %ul
+      %li= link_to "Add to My Blueprints", new_blueprint_path(:typeid => item.typeid)
+      %li
+        Product: #{link_to item.inv_blueprint_type.product.typename, :action => "info", :id => item.inv_blueprint_type.product.id}
+      - if item.inv_blueprint_type.parent_blueprint
+        %li
+          Parent Blueprint: #{link_to item.inv_blueprint_type.parent_blueprint.blueprint.typename, :action => "info", :id => item.inv_blueprint_type.parent_blueprint.blueprint.id}
+      - unless item.inv_blueprint_type.child_blueprints.empty?
+        %li
+          Child Blueprints:
+          %ul
+            - item.inv_blueprint_type.child_blueprints.each do |cbp|
+              %li= link_to cbp.blueprint.typename, :action => "info", :id => cbp.blueprint.id
+      %li
+        Price:
+        - if acp = item.actual_cheapest_price_for(current_user)
+          = number_with_precision acp.first, :delimiter => ","
+          @ #{acp.last}
+        - else
+          none
+      %li
+        wastefactor: #{item.inv_blueprint_type.wastefactor}
+        %br
+          materialmodifier: #{item.inv_blueprint_type.materialmodifier}
+          %br
+            techlevel: #{item.inv_blueprint_type.techlevel}
+            %br
+      %li
+        Materials:
+        %ul
+          - item.inv_blueprint_type.product.materials.each do |mat|
+            %li
+              = mat.quantity
+              x #{link_to mat.material.typename, :action => "info", :id => mat.material.id} --
+              - if acp = mat.material.actual_cheapest_price_for(current_user)
+                = acp.first
+                @ #{acp.last}
+              - else
+                no price
+      - unless item.ram_type_requirements.empty?
+        %li
+          RAM Requirements:
+          %ul
+            - item.ram_type_requirements.group_by { |ram| ram.ram_activity }.each do |act, rams|
+              %li
+                = act.activityname
+                %ul
+                  - rams.group_by { |ram| ram.requirement.inv_group.inv_category }.each do |cat, rams2|
+                    %li
+                      = cat.categoryname
+                      %ul
+                        - rams2.each do |ram|
+                          %li
+                            = render :partial => "ram_req_row", :locals => { :ram => ram }
+  %ul
+    %li
+      Prices:
+      %ul
+        - item.prices_for(current_user).each do |price|
+          %li
+            = price.price
+            @ #{price.location.name} [#{link_to "edit", [:edit, price]}] [#{link_to "del", [price], :method => :delete}]
+      = link_to "add", new_price_path(:typeid => item)
+  - if item.created_by_blueprint
+    %li
+      Created By: #{link_to item.created_by_blueprint.blueprint.typename, :action => "info", :id => item.created_by_blueprint.blueprint.id}

@@ -1,8 +1,0 @@
-<% if ram.requirement.inv_group.inv_category.id == 16 # skills %>
-  <%= ram.requirement.typename %> lv<%= ram.quantity %>
-<% else %>
-  <%= ram.quantity %> x <%= ram.requirement.typename %>
-  <% if ram.damageperjob < 1.0 %>
-    (damage: <%= ram.damageperjob * 100.0 %>%)
-  <% end %>
-<% end %>

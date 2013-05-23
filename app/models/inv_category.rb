@@ -1,14 +1,3 @@
-# == Schema Information
-#
-# Table name: invcategories
-#
-#  categoryid   :integer         not null, primary key
-#  categoryname :string(100)
-#  description  :string(3000)
-#  iconid       :integer
-#  published    :integer
-#
-
 class InvCategory < ActiveRecord::Base
 
   set_table_name "invcategories"

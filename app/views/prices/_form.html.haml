@@ -1,0 +1,16 @@
+= form_for(@price) do |f|
+  - if @price.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@price.errors.count, "error")
+        prohibited this price from being saved:
+      %ul
+        - @price.errors.full_messages.each do |msg|
+          %li= msg
+  = f.hidden_field :typeid
+  %p
+    Price: #{f.text_field :price}
+  %p
+    Location: #{f.select :location_id, current_user.locations}
+  .actions
+    = f.submit

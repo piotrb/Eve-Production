@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: invmarketgroups
-#
-#  marketgroupid   :integer         not null, primary key
-#  parentgroupid   :integer
-#  marketgroupname :string(100)
-#  description     :string(3000)
-#  iconid          :integer
-#  hastypes        :integer
-#
-
 class InvMarketGroup < ActiveRecord::Base
 
   set_table_name "invmarketgroups"

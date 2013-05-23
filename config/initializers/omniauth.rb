@@ -4,5 +4,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     ENV['GOOGLE_OAUTH2_CLIENT_SECRET'],
     access_type: 'online',
     approval_prompt: 'force',
-    scope: 'userinfo.email,userinfo.profile',
+    scope: 'userinfo.email,userinfo.profile'
 end

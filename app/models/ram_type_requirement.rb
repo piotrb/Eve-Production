@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: ramtyperequirements
-#
-#  typeid         :integer         not null
-#  activityid     :integer         not null
-#  requiredtypeid :integer         not null
-#  quantity       :integer
-#  damageperjob   :float
-#  recycle        :integer
-#
-
 class RamTypeRequirement < ActiveRecord::Base
 
   set_table_name "ramtyperequirements"

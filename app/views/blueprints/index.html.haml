@@ -1,0 +1,19 @@
+%h1 Listing Blueprints
+%table.table
+  %tr
+    %th Name
+    %th ME
+    %th PE
+    %th
+    %th
+    %th
+  - @blueprints.each do |blueprint|
+    %tr
+      %td= blueprint.inv_type.typename
+      %td= blueprint.material_level
+      %td= blueprint.productivity_level
+      %td= link_to 'Show', blueprint
+      %td= link_to 'Edit', edit_blueprint_path(blueprint)
+      %td= link_to 'Destroy', blueprint, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Blueprint', new_blueprint_path

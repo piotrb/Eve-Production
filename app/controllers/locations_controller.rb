@@ -24,13 +24,13 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location.attributes = params[:location]
+    @location.attributes = location_params
     @location.save
     respond_with(@location, :location => locations_path, :notice => 'Location was successfully created.' )
   end
 
   def update
-    @location.attributes = params[:location]
+    @location.attributes = location_params
     @location.save
     respond_with(@location, :location => locations_path, :notice => 'Location was successfully updated.' )
   end
@@ -51,6 +51,10 @@ protected
     else
       @location = @locations.build
     end
+  end
+
+  def location_params
+    params.require(:location).permit(:name)
   end
 
 end

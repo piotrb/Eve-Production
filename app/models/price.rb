@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: prices
-#
-#  id          :integer         not null, primary key
-#  price       :float
-#  typeid      :integer
-#  location_id :integer
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
-#
-
 class Price < ActiveRecord::Base
 
   belongs_to :location

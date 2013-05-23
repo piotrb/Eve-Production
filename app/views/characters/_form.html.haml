@@ -1,0 +1,29 @@
+= form_for(@character, html: { class: "form-horizontal" }) do |f|
+  - if @character.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@character.errors.count, "error")
+        prohibited this character from being saved:
+      %ul
+        - @character.errors.full_messages.each do |msg|
+          %li= msg
+  %fieldset
+    .controlgroup
+      = f.label :name, class: 'control-label'
+      .controls
+        = f.text_field :name
+    .controlgroup
+      = f.label :charid, class: 'control-label'
+      .controls
+        = f.number_field :charid
+    .controlgroup
+      = f.label :pe_skill, class: 'control-label'
+      .controls
+        = f.number_field :pe_skill
+    .controlgroup
+      = f.label :industry_skill, class: 'control-label'
+      .controls
+        = f.number_field :industry_skill
+    .controlgroup
+      .controls
+        = f.submit :class => "btn primary"

@@ -1,0 +1,19 @@
+%h1 Listing prices
+- if @location
+  %h2
+    At Location: #{@location.name}
+%table
+  %tr
+    %th
+    %th
+    %th
+  - @prices.each do |price|
+    %tr
+      %td/
+    %td= link_to 'Show', [@location, price].compact
+    %td= link_to 'Edit', [:edit, @location, price].compact
+    %td= link_to 'Destroy', [@location, price].compact, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Price', new_price_path
+- if @location
+  = link_to "New Price @ #{@location.name}", [:new, @location, :price]

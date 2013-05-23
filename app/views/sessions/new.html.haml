@@ -1,0 +1,9 @@
+= form_for :session, :url => sessions_path, :method => :post do |f|
+  %div
+    Username:
+    = f.text_field :username
+  %div
+    Password:
+    = f.password_field :password
+  %div
+    = f.submit "Login"

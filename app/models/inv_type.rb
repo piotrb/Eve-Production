@@ -1,24 +1,3 @@
-# == Schema Information
-#
-# Table name: invtypes
-#
-#  typeid              :integer         not null, primary key
-#  groupid             :integer
-#  typename            :string(100)
-#  description         :string(3000)
-#  radius              :float
-#  mass                :float
-#  volume              :float
-#  capacity            :float
-#  portionsize         :integer
-#  raceid              :integer
-#  baseprice           :decimal(19, 4)
-#  published           :integer
-#  marketgroupid       :integer
-#  chanceofduplicating :float
-#  iconid              :integer
-#
-
 class InvType < ActiveRecord::Base
 
   set_table_name "invtypes"

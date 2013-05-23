@@ -1,22 +1,3 @@
-# == Schema Information
-#
-# Table name: invblueprinttypes
-#
-#  blueprinttypeid          :integer         not null, primary key
-#  parentblueprinttypeid    :integer
-#  producttypeid            :integer
-#  productiontime           :integer
-#  techlevel                :integer(2)
-#  researchproductivitytime :integer
-#  researchmaterialtime     :integer
-#  researchcopytime         :integer
-#  researchtechtime         :integer
-#  productivitymodifier     :integer
-#  materialmodifier         :integer(2)
-#  wastefactor              :integer(2)
-#  maxproductionlimit       :integer
-#
-
 class InvBlueprintType < ActiveRecord::Base
 
   set_table_name "invblueprinttypes"

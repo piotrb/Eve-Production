@@ -1,14 +1,3 @@
-# == Schema Information
-#
-# Table name: ramactivities
-#
-#  activityid   :integer         not null, primary key
-#  activityname :string(100)
-#  iconno       :string(5)
-#  description  :string(1000)
-#  published    :integer
-#
-
 class RamActivity < ActiveRecord::Base
 
   set_table_name "ramactivities"
