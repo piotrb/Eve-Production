@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '~> 3.2.0'
 
 gem "pg"
+gem 'mysql2'
 
 gem 'thin'
 gem 'json'
@@ -21,7 +22,6 @@ end
 
 group :development do
   gem 'annotate'
-  gem 'mysql2'
   gem 'unicorn'
 end
 
