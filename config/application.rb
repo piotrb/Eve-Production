@@ -22,5 +22,12 @@ module EveProduction
 
     config.assets.initialize_on_precompile = false
 
+    config.generators do |g|
+      g.template_engine :haml
+      g.view_specs      false
+      g.helper_specs    false
+      g.test_framework  false, :fixture => false
+    end
+
   end
 end

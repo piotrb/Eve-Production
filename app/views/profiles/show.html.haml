@@ -1,0 +1,26 @@
+%h1
+  My Profile
+
+- if @profile.pairing
+  %div
+    %strong
+      Source:
+    = @profile.pairing
+
+%div
+  %strong
+    Name:
+  = @profile.name
+
+%div
+  %strong
+    Username:
+  = @profile.username.present? ? @profile.username : "- not set -"
+
+%div
+  %strong
+    Password:
+  = @profile.has_password? ? "- set -" : "- not set -"
+
+%div
+  = link_to "Edit", :action => :edit

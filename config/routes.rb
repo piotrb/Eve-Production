@@ -17,9 +17,10 @@ EveProduction::Application.routes.draw do
   end
   resources :prices
 
-  resources :dashboard do
+  resources :dashboard, :only => [:index] do
     collection do
       get :info
+      resource :profile, :only => [:show, :edit, :update]
     end
   end
 

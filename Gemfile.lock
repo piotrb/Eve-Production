@@ -61,6 +61,11 @@ GEM
       thor (>= 0.13.6)
     haml (4.0.3)
       tilt
+    haml-rails (0.4)
+      actionpack (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+      haml (>= 3.1, < 4.1)
+      railties (>= 3.1, < 4.1)
     hashie (2.0.5)
     hike (1.2.2)
     httpauth (0.2.0)
@@ -170,7 +175,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   dalli
   foreman
-  haml
+  haml-rails
   jbuilder (~> 1.0.1)
   jquery-rails
   json

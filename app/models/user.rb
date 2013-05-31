@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
       user.provider = auth["provider"]
       user.uid = auth["uid"]
       user.name = profile["name"]
+      user.password = SecureRandom.hex(12)
+      user.password_confirmation = user.password
     end
   end
 

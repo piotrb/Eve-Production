@@ -34,7 +34,7 @@ gem 'mysql2'
 gem 'puma'
 gem 'json'
 
-gem 'haml'
+gem 'haml-rails'
 
 gem "omniauth"
 gem "omniauth-google-oauth2"

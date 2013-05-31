@@ -10,7 +10,7 @@
     .container
       .navbar.navbar-inverse
         .navbar-inner
-          %a.brand{:href => "#"} Eve Production
+          = link_to "Eve Production", root_path, class: 'brand'
           %ul.nav
             %li= link_to "Dashboard", root_path
             - if signed_in?
@@ -24,9 +24,10 @@
                   Welcome, #{current_user.name}!
                   %b.caret
                 %ul.dropdown-menu
+                  %li= link_to "Profile", profile_path
                   %li= link_to "Sign Out", session_path('current'), :method => :delete
             - else
-              %li= link_to "Sign in", new_session_path
+              -#%li= link_to "Sign in", new_session_path
               %li= link_to "Sign in with Google", "/auth/google_oauth2"
     .container
       %div

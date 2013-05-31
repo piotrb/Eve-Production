@@ -1,12 +1,11 @@
 class DashboardController < ApplicationController
-  def index
 
+  def index
     if params[:q]
       @items = InvType.items.where("typename ilike ?", "%#{params[:q]}%")
     else
       @items = []
     end
-
   end
 
   def info
